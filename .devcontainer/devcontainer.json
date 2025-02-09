@@ -1,0 +1,21 @@
+{
+    "name": "DevTrack Dev Environment",
+    "dockerFile": "dev.Dockerfile",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode"
+              ],
+              "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash"
+              }
+        }
+    },
+    "forwardPorts": [3000],
+    "postCreateCommand": "yarn --version",
+    "mounts": [
+      "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind",
+      "source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind"
+    ]
+  }
