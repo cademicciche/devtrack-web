@@ -1,24 +1,27 @@
 import { Link } from "@heroui/link";
-import { Snippet } from "@heroui/snippet";
-import { Code } from "@heroui/code";
 import { button as buttonStyles } from "@heroui/theme";
 
-import { siteConfig } from "@/config/site";
+import dynamic from 'next/dynamic';
+
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+
+
 import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
-import DefaultLayout from "@/layouts/default";
+import splashAnimation from '@/lotties/splash_animation.json';
 
 export default function IndexPage() {
   return (
-    <DefaultLayout>
-      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+      <section className="flex flex-col items-center justify-center gap-1 py-8 md:py-10">
+        <Lottie
+            loop={true}
+            autoPlay={true}
+            animationData={splashAnimation}
+        />
         <div className="inline-block max-w-xl text-center justify-center">
-          <span className={title()}>Make&nbsp;</span>
-          <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
+          <span className={title()}>Seamlessly track, manage, and optimize your project time.</span>
           <br />
-          <span className={title()}>
-            websites regardless of your design experience.
-          </span>
+          <span className={title({ color: "yellow" })}>One timer at a time.</span>
+          <br />
           <div className={subtitle({ class: "mt-4" })}>
             Beautiful, fast and modern React UI library.
           </div>
@@ -32,29 +35,20 @@ export default function IndexPage() {
               radius: "full",
               variant: "shadow",
             })}
-            href={siteConfig.links.docs}
           >
-            Documentation
+            Sign Up
           </Link>
           <Link
             isExternal
-            className={buttonStyles({ variant: "bordered", radius: "full" })}
-            href={siteConfig.links.github}
+            className={buttonStyles({
+              color: "secondary",
+              radius: "full",
+              variant: "shadow",
+            })}
           >
-            <GithubIcon size={20} />
-            GitHub
+            Login
           </Link>
         </div>
-
-        <div className="mt-8">
-          <Snippet hideCopyButton hideSymbol variant="bordered">
-            <span>
-              Get started by editing{" "}
-              <Code color="primary">pages/index.tsx</Code>
-            </span>
-          </Snippet>
-        </div>
       </section>
-    </DefaultLayout>
   );
 }
